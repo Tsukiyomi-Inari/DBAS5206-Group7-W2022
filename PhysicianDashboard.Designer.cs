@@ -41,6 +41,11 @@ namespace LakeridgeCommunityHospital
 			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("2021-12-20 2:00PM     Follow up set");
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.dvgPatientListTable = new System.Windows.Forms.DataGridView();
+			this.dvgColAdmittion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dvgColAdmitted = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Date_Discharged = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dvgColAppointment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dvgColPatient = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tbAddNewNote = new System.Windows.Forms.TabControl();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -58,11 +63,6 @@ namespace LakeridgeCommunityHospital
 			this.lblStripStatus = new System.Windows.Forms.Label();
 			this.statusChange = new System.Windows.Forms.ToolStripStatusLabel();
 			this.sStrpStatusBar = new System.Windows.Forms.StatusStrip();
-			this.dvgColAdmittion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dvgColAdmitted = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Date_Discharged = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dvgColAppointment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dvgColPatient = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			lstBoxPatientDetailsView = new System.Windows.Forms.ListBox();
 			((System.ComponentModel.ISupportInitialize)(this.dvgPatientListTable)).BeginInit();
 			this.panel1.SuspendLayout();
@@ -101,6 +101,41 @@ namespace LakeridgeCommunityHospital
 			this.dvgPatientListTable.Size = new System.Drawing.Size(769, 303);
 			this.dvgPatientListTable.TabIndex = 4;
 			this.dvgPatientListTable.SelectionChanged += new System.EventHandler(this.GetCurrentPatientSelection);
+			// 
+			// dvgColAdmittion
+			// 
+			this.dvgColAdmittion.DataPropertyName = "ADMISSION_NUMBER";
+			this.dvgColAdmittion.HeaderText = "Admittion Number";
+			this.dvgColAdmittion.MinimumWidth = 100;
+			this.dvgColAdmittion.Name = "dvgColAdmittion";
+			// 
+			// dvgColAdmitted
+			// 
+			this.dvgColAdmitted.DataPropertyName = "DATE_ADDMITTED";
+			this.dvgColAdmitted.HeaderText = "Admitted ";
+			this.dvgColAdmitted.MinimumWidth = 100;
+			this.dvgColAdmitted.Name = "dvgColAdmitted";
+			// 
+			// Date_Discharged
+			// 
+			this.Date_Discharged.DataPropertyName = "DATE_DISCHARGED";
+			this.Date_Discharged.HeaderText = "Discharged";
+			this.Date_Discharged.MinimumWidth = 100;
+			this.Date_Discharged.Name = "Date_Discharged";
+			// 
+			// dvgColAppointment
+			// 
+			this.dvgColAppointment.DataPropertyName = "TIME";
+			this.dvgColAppointment.HeaderText = "Appointment";
+			this.dvgColAppointment.MinimumWidth = 100;
+			this.dvgColAppointment.Name = "dvgColAppointment";
+			// 
+			// dvgColPatient
+			// 
+			this.dvgColPatient.DataPropertyName = "PATIENT_NAME";
+			this.dvgColPatient.HeaderText = "PatientDB Name";
+			this.dvgColPatient.MinimumWidth = 100;
+			this.dvgColPatient.Name = "dvgColPatient";
 			// 
 			// panel1
 			// 
@@ -302,41 +337,6 @@ namespace LakeridgeCommunityHospital
 			this.sStrpStatusBar.Size = new System.Drawing.Size(1490, 22);
 			this.sStrpStatusBar.TabIndex = 3;
 			this.sStrpStatusBar.Text = "statusStrip1";
-			// 
-			// dvgColAdmittion
-			// 
-			this.dvgColAdmittion.DataPropertyName = "ADMISSION_NUMBER";
-			this.dvgColAdmittion.HeaderText = "Admittion Number";
-			this.dvgColAdmittion.MinimumWidth = 100;
-			this.dvgColAdmittion.Name = "dvgColAdmittion";
-			// 
-			// dvgColAdmitted
-			// 
-			this.dvgColAdmitted.DataPropertyName = "DATE_ADDMITTED";
-			this.dvgColAdmitted.HeaderText = "Admitted ";
-			this.dvgColAdmitted.MinimumWidth = 100;
-			this.dvgColAdmitted.Name = "dvgColAdmitted";
-			// 
-			// Date_Discharged
-			// 
-			this.Date_Discharged.DataPropertyName = "DATE_DISCHARGED";
-			this.Date_Discharged.HeaderText = "Discharged";
-			this.Date_Discharged.MinimumWidth = 100;
-			this.Date_Discharged.Name = "Date_Discharged";
-			// 
-			// dvgColAppointment
-			// 
-			this.dvgColAppointment.DataPropertyName = "TIME";
-			this.dvgColAppointment.HeaderText = "Appointment";
-			this.dvgColAppointment.MinimumWidth = 100;
-			this.dvgColAppointment.Name = "dvgColAppointment";
-			// 
-			// dvgColPatient
-			// 
-			this.dvgColPatient.DataPropertyName = "PATIENT_NAME";
-			this.dvgColPatient.HeaderText = "PatientDB Name";
-			this.dvgColPatient.MinimumWidth = 100;
-			this.dvgColPatient.Name = "dvgColPatient";
 			// 
 			// Form1
 			// 

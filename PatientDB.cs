@@ -23,27 +23,31 @@ namespace LakeridgeCommunityHospital
 			PatientDB patientDB = this;
 			patientDB.PatientNumber = patientDB.ToString();
 			patientDB.PatientName = patientDB.ToString();
-			patientDB.AppTime = patientDB.ToString();
+			patientDB.DateAdmitted = patientDB.ToString();
 			patientDB.DateDischarge = patientDB.ToString();
 			patientDB.AdmiNum = patientDB.ToString();
+			patientDB.Location = patientDB.ToString();
 		}
 
-		public PatientDB(string patientNumber, string patientName, string appTime, string dateDischarge, string admiNum)
+		public PatientDB(string patientNumber, string patientName,string dateAdmitted ,string dateDischarge, string admiNum, string location)
 		{
 			PatientNumber = patientNumber;
 			PatientName = patientName;
-			AppTime = appTime;
+
+			DateAdmitted = dateAdmitted;
 			DateDischarge = dateDischarge;
 			AdmiNum = admiNum;
+			Location = location;
 		}
 		/// <summary>
 		/// Variables for getting data for DVG on PhysicianDashboard
 		/// </summary>
 		public string PatientNumber { get; set; }
 		public string PatientName { get; set; }
-		public string AppTime { get; set; }
+		public string DateAdmitted { get; set; }
 		public string DateDischarge { get; set; }
 		public string AdmiNum { get; set; }
+		public string Location { get; set; }
 
 		#endregion
 
@@ -76,10 +80,10 @@ namespace LakeridgeCommunityHospital
 		/// </summary>
 		/// <param name="patient"></param>
 		/// <returns></returns>
-		public static int GetPatientNumber(PatientDB patient)
+		public static string GetPatientNumber(PatientDB patient)
 		{
-			int number = 0;
-			number = Convert.ToInt32(patient.PatientNumber);
+			string number = "";
+			number = patient.PatientNumber;
 
 			return number;
 		}
@@ -91,20 +95,23 @@ namespace LakeridgeCommunityHospital
 		public static List<PatientDB> GetPatientListData()
 		{
 			List<PatientDB> patients = new List<PatientDB>();
-			string connectionStr = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+			string connectionStr =  GetConnectionString();
 			SqlConnection connection = new SqlConnection(connectionStr);
 			connection.Open();
-			string sqlStatement = "SELECT p.Patient_Name, ap.TIME, a.DATE_DISCHARGED, a.ADMISSION_NUMBER FROM LakeRidgeHospital.dbo.ADMISSION a, LakeRidgeHospital.dbo.PatientDB p, LakeRidgeHospital.dbo.Appointment ap WHERE p.Patient_Number = a.Patient_Number ";
+			string sqlStatement = "SELECT p.PATIENT_NUMBER,  p.PATIENT_NAME, a.DATE_DISCHARGED, a.ADMISSION_NUMBER, a.DATE_ADMITTED, CONCAT( a.ROOM_NUMBER , a.BED_CHAR) AS LOCATION FROM LakeRidgeHospital.dbo.ADMISSION AS a, LakeRidgeHospital.dbo.PATIENT AS p WHERE p.PATIENT_NUMBER = a.PATIENT_NUMBER;";
 			SqlCommand command = new SqlCommand(sqlStatement, connection);
-			SqlDataReader reader = command.ExecuteReader(CommandBehavior.SequentialAccess);
+			SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 			while (reader.Read())
 			{
-				PatientDB patient = new PatientDB();	
-				patient.PatientNumber = reader["Patient_Number"].ToString();
-				patient.PatientName = reader["Patient_Name"].ToString();
-				patient.AppTime = reader["TIME"].ToString();
-				patient.DateDischarge = reader["DATE_DISCHARGED"].ToString();
-				patient.AdmiNum = reader["ADMISSION_NUMBER"].ToString();
+				PatientDB patient = new PatientDB
+				{
+					PatientName = reader["PATIENT_NAME"].ToString(),
+					PatientNumber = reader["PATIENT_NUMBER"].ToString(),
+					DateDischarge = reader["DATE_DISCHARGED"].ToString(),
+					AdmiNum = reader["ADMISSION_NUMBER"].ToString(),
+					DateAdmitted = reader["DATE_ADMITTED"].ToString(),
+					Location = reader["LOCATION"].ToString()
+				};
 				//add retreived patient to list
 				patients.Add(patient);
 			}
@@ -143,11 +150,13 @@ namespace LakeridgeCommunityHospital
 
 		public static void GetPatientNote(string admissionNumber)
 		{
-			string connection = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
-			string sqlStatement = "Select  a.DATE_ADMITTED,n.Entry  FROM LakeRidgeHospital.dbo.NOTE n , LakeRidgeHospital.dbo.ADMISSION a WHERE n.ADMISSION_Number = a." + admissionNumber + ";";
-			SqlConnection cn = new SqlConnection(connection);
+			string connection = GetConnectionString();
+			SqlParameter admissParameter = new SqlParameter("@ADDMISSION_NUMBER", admissionNumber);
+			string sqlStatement = "Select  a.DATE_ADMITTED, n.ENTRY  FROM LakeRidgeHospital.dbo.NOTE AS n , LakeRidgeHospital.dbo.ADMISSION AS a WHERE n.ADMISSION_Number = @ADDMISSION_NUMBER";
+			using SqlConnection cn = new SqlConnection(connection);
+			using SqlCommand command = new SqlCommand(sqlStatement, cn);
+			command.Parameters.Add(admissParameter);
 			cn.Open();
-			SqlCommand command = new SqlCommand(sqlStatement, cn);
 			SqlDataAdapter thisAdapter = new SqlDataAdapter(command);
 			DataTable data = new DataTable("fill ME");
 			thisAdapter.Fill(data);

@@ -43,17 +43,14 @@ namespace LakeridgeCommunityHospital
 			{
 				
 				//Use method for calling data from database as a list
-				 patientsList = GetPatientListData();
-
 				//Add data to DVG table
-				dvgPatientListTable.DataSource =  patientsList;
+				dvgPatientListTable.DataSource =  GetPatientListData();
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.ToString());
 			}
 
-			frmNewNote_Load(sender, e);
 		}
 		#region Singleton Pattern
 		// Singleton Pattern
@@ -184,13 +181,22 @@ namespace LakeridgeCommunityHospital
 			try
 			{
 				if (dvgPatientListTable.CurrentRow != null)
-					thisPatientDb = (PatientDB)dvgPatientListTable.CurrentRow.Cells.GetEnumerator();
-
+				{
+					thisPatientDb.PatientNumber = dvgPatientListTable.CurrentRow.Cells[0].ToString();
+					thisPatientDb.PatientName = dvgPatientListTable.CurrentRow.Cells[1].ToString();
+					thisPatientDb.DateDischarge = dvgPatientListTable.CurrentRow.Cells[2].ToString();
+					thisPatientDb.AdmiNum = dvgPatientListTable.CurrentRow.Cells[3].ToString(); 
+					thisPatientDb.DateAdmitted = dvgPatientListTable.CurrentRow.Cells[4].ToString(); 
+					thisPatientDb.Location = dvgPatientListTable.CurrentRow.Cells[5].ToString();
+				}
 			}
-			catch (NullReferenceException)
+			catch (NullReferenceException err)
 			{
+				statusChange.Text = @"Error encountered: " + err;
 				//nothing!
 			}
+			GetPatientNote(thisPatientDb.AdmiNum);
+			
 		}
 	}
 	}
