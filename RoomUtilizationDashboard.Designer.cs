@@ -76,7 +76,7 @@ namespace LakeridgeCommunityHospital
 			this.gbxRoomStats.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.gbxRoomStats.Location = new System.Drawing.Point(684, 89);
 			this.gbxRoomStats.Name = "gbxRoomStats";
-			this.gbxRoomStats.Size = new System.Drawing.Size(405, 475);
+			this.gbxRoomStats.Size = new System.Drawing.Size(443, 475);
 			this.gbxRoomStats.TabIndex = 2;
 			this.gbxRoomStats.TabStop = false;
 			this.gbxRoomStats.Text = "Room Statistics";
@@ -91,7 +91,7 @@ namespace LakeridgeCommunityHospital
 			this.rtBoxStats.Location = new System.Drawing.Point(6, 22);
 			this.rtBoxStats.MouseState = MaterialSkin.MouseState.HOVER;
 			this.rtBoxStats.Name = "rtBoxStats";
-			this.rtBoxStats.Size = new System.Drawing.Size(393, 447);
+			this.rtBoxStats.Size = new System.Drawing.Size(431, 447);
 			this.rtBoxStats.TabIndex = 5;
 			this.rtBoxStats.Text = "Total Number of Bed per Room type \nSP -  5\nIC - 1\nW3 - 6\nW4- 4\nPR-1\n\n\nRoom with O" +
     "pen bed\n328 -W3\n330-W4\n102 - SP";
@@ -103,7 +103,7 @@ namespace LakeridgeCommunityHospital
 			this.btnAssignRoom.Depth = 0;
 			this.btnAssignRoom.HighEmphasis = true;
 			this.btnAssignRoom.Icon = null;
-			this.btnAssignRoom.Location = new System.Drawing.Point(987, 624);
+			this.btnAssignRoom.Location = new System.Drawing.Point(986, 664);
 			this.btnAssignRoom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.btnAssignRoom.MouseState = MaterialSkin.MouseState.HOVER;
 			this.btnAssignRoom.Name = "btnAssignRoom";
@@ -122,7 +122,7 @@ namespace LakeridgeCommunityHospital
 			this.btnDischargeRoom.Depth = 0;
 			this.btnDischargeRoom.HighEmphasis = true;
 			this.btnDischargeRoom.Icon = null;
-			this.btnDischargeRoom.Location = new System.Drawing.Point(818, 624);
+			this.btnDischargeRoom.Location = new System.Drawing.Point(814, 664);
 			this.btnDischargeRoom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.btnDischargeRoom.MouseState = MaterialSkin.MouseState.HOVER;
 			this.btnDischargeRoom.Name = "btnDischargeRoom";
@@ -239,7 +239,7 @@ namespace LakeridgeCommunityHospital
             this.bEDCHARDataGridViewTextBoxColumn,
             this.eXTENSIONDataGridViewTextBoxColumn});
 			this.dataGridView3.DataSource = this.bEDBindingSource;
-			this.dataGridView3.Location = new System.Drawing.Point(354, 587);
+			this.dataGridView3.Location = new System.Drawing.Point(375, 634);
 			this.dataGridView3.Name = "dataGridView3";
 			this.dataGridView3.ReadOnly = true;
 			this.dataGridView3.Size = new System.Drawing.Size(383, 150);

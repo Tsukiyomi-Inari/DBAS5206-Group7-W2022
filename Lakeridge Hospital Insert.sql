@@ -13,211 +13,6 @@
 **/
 
 
----DROP DATABASE
-DROP DATABASE IF EXISTS LakeRidgeHospital
-GO
-CREATE DATABASE LakeRidgeHospital
-GO
-
-USE LakeRidgeHospital
-GO
----CREATE TABLES
-
--- Create table to hold financial status providers
-CREATE TABLE LakeRidgeHospital.dbo.FINANCIAL_STATUS
-(
-	STATUS_ID SMALLINT IDENTITY(100, 1) PRIMARY KEY,
-	PROVIDER VARCHAR(30) NOT NULL,
-)
-
--- Create table of transactions made
-CREATE TABLE LakeRidgeHospital.dbo.CHARGE_TRANSACTION
-(
-	TRANSACTION_NUMBER INT IDENTITY(1000,1) PRIMARY KEY,
-	STATUS_ID SMALLINT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.FINANCIAL_STATUS(STATUS_ID) NOT NULL,
-	DATE DATETIME NOT NULL,
-	PAID money NOT NULL,
-)
-
--- Create table of Patients
-CREATE TABLE LakeRidgeHospital.dbo.PATIENT
-(
-	PATIENT_NUMBER INT IDENTITY(100000,1) PRIMARY KEY,
-	PATIENT_NAME VARCHAR(40) NOT NULL,
-	PATIENT_ADDRESS VARCHAR(25) NOT NULL,
-	CITY	VARCHAR(15) NOT NULL,
-	PROVINCE CHAR(2) NOT NULL,
-	POSTAL_CODE CHAR(7) NOT NULL,
-	TELEPHONE CHAR(12) NOT NULL,
-	SEX VARCHAR(6) NOT NULL,
-	STATUS_ID SMALLINT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.FINANCIAL_STATUS(STATUS_ID) NOT NULL,
-
-)
-
--- Create table of appointments
-CREATE TABLE LakeRidgeHospital.dbo.APPOINTMENT
-(
-	APPOINTMENT_NUMBER INT IDENTITY(100000000, 1) PRIMARY KEY,
-	PATIENT_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.PATIENT(PATIENT_NUMBER) NOT NULL,
-	TIME DATETIME NOT NULL,
-	DESCRIPTION VARCHAR(200) NOT NULL, 
-)
-
--- Create table of types of users 
-CREATE TABLE LakeRidgeHospital.dbo.USER_TYPE
-(
-	USER_TYPE_NUMBER SMALLINT IDENTITY(1,1) PRIMARY KEY,
-	USER_TYPE VARCHAR(10) NOT NULL,
-)
-
--- Create table of users
-CREATE TABLE LakeRidgeHospital.dbo.DB_USER
-(
-	USER_ID INT IDENTITY(1000, 1) PRIMARY KEY,
-	USER_TYPE_NUMBER SMALLINT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.USER_TYPE(USER_TYPE_NUMBER) NOT NULL,
-	PASSWORD CHAR(40) NOT NULL,
-)
-
--- Create table of different specialities
-CREATE TABLE LakeRidgeHospital.dbo.PHYSICIAN_SPECIALTY
-(
-	SPECIALTY_ID VARCHAR(3) PRIMARY KEY NOT NULL,
-	SPECIALTY VARCHAR(25) NOT NULL,
-)
-
--- Create table of physicians
-CREATE TABLE LakeRidgeHospital.dbo.PHYSICIAN
-(
-	PHYSICIAN_NUMBER INT IDENTITY(100,1) PRIMARY KEY,
-	USER_ID INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.DB_USER(USER_ID) NOT NULL,
-	PHYSICIAN_NAME VARCHAR(40) NOT NULL,
-	TELEPHONE CHAR(12) NOT NULL,
-	SPECIALTY_ID VARCHAR(3) FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.PHYSICIAN_SPECIALTY(SPECIALTY_ID) NOT NULL,
-
-)
-
--- Create table of diagnosis
-CREATE TABLE LakeRidgeHospital.dbo.DIAGNOSIS
-(
-	DIAGNOSIS_NUMBER INT IDENTITY(100,1) PRIMARY KEY,
-	DIAGNOSIS VARCHAR(200) NOT NULL,
-)
-
--- Create table of treatment
-CREATE TABLE LakeRidgeHospital.dbo.TREATMENT
-(
-	TREATMENT_NUMBER INT IDENTITY(100000000, 1) PRIMARY KEY,
-	DIAGNOSIS_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.DIAGNOSIS(DIAGNOSIS_NUMBER) NOT NULL,
-	PHYSICIAN_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.PHYSICIAN(PHYSICIAN_NUMBER) NOT NULL,
-	PATIENT_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.PATIENT(PATIENT_NUMBER) NOT NULL,
-	DESCRIPTION VARCHAR(200) NOT NULL,
-)
-
--- Create table of room types
-CREATE TABLE LakeRidgeHospital.dbo.ROOM_TYPE
-(
-	ROOM_TYPE_ID CHAR(2) PRIMARY KEY,
-	DESCRIPTION VARCHAR(20) NOT NULL,
-)
-
--- Create table of rooms 
-CREATE TABLE LakeRidgeHospital.dbo.ROOM
-(
-	ROOM_NUMBER SMALLINT PRIMARY KEY,
-	ROOM_TYPE_NUMBER CHAR(2) FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.ROOM_TYPE(ROOM_TYPE_ID) NOT NULL,
-)
-
--- Create table of beds
-CREATE TABLE LakeRidgeHospital.dbo.BED
-(
-	ROOM_NUMBER SMALLINT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.ROOM(ROOM_NUMBER) NOT NULL,
-	BED_CHAR CHAR NOT NULL,
-	EXTENSION SMALLINT NOT NULL,
-	PRIMARY KEY (ROOM_NUMBER, BED_CHAR),
-
-)
-
--- Create table to contain admissions
-CREATE TABLE LakeRidgeHospital.dbo.ADMISSION
-(
-	ADMISSION_NUMBER INT IDENTITY(1000000,1) PRIMARY KEY,
-	PATIENT_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.PATIENT(PATIENT_NUMBER) NOT NULL,
-	DATE_ADMITTED DATETIME NOT NULL,
-	DATE_DISCHARGED DATETIME,
-	ROOM_NUMBER SMALLINT NOT NULL,
-	BED_CHAR CHAR NOT NULL,
-	FOREIGN KEY(ROOM_NUMBER, BED_CHAR) REFERENCES LakeRidgeHospital.dbo.BED(ROOM_NUMBER, BED_CHAR),
-)
-
--- Create table of cost centers
-CREATE TABLE LakeRidgeHospital.dbo.COST_CENTER 
-(
-	COST_CENTER_NUMBER TINYINT IDENTITY(1,1) PRIMARY KEY,
-	DEPARTMENT_NAME VARCHAR(200) NOT NULL,
-
-)
-
--- Create table of items
-CREATE TABLE LakeRidgeHospital.dbo.ITEM
-(
-	ITEM_CODE INT IDENTITY (100,1) PRIMARY KEY,
-	COST_CENTER_NUMBER TINYINT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.COST_CENTER(COST_CENTER_NUMBER) NOT NULL,
-	DESCRIPTION VARCHAR(30) NOT NULL,
---It is important to note all charges are recorded in CAD$ 
-	CHARGE smallmoney NOT NULL,
-)
-
--- Create table of charges
-CREATE TABLE LakeRidgeHospital.dbo.CHARGE
-(
-	CHARGE_NUMBER INT IDENTITY(100000,1) PRIMARY KEY,
-	ADMISSION_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.ADMISSION(ADMISSION_NUMBER) NOT NULL,
-	ITEM_CODE INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.ITEM(ITEM_CODE) NOT NULL,
-	QUANTITY TINYINT NOT NULL,
-	DATE_CHARGED DATETIME NOT NULL,
-)
-
--- Create table of notes
-CREATE TABLE LakeRidgeHospital.dbo.NOTE
-(
-	NOTE_NUMBER BIGINT IDENTITY(1,1) PRIMARY KEY,
-	ADMISSION_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.ADMISSION(ADMISSION_NUMBER) NOT NULL,
-	ENTRY VARCHAR(200) NOT NULL,
-)
-
--- Create table of admissions related to patients
-CREATE TABLE LakeRidgeHospital.dbo.ADMISSION_LINE_ITEM
-(
-	ADMISSION_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.ADMISSION(ADMISSION_NUMBER) NOT NULL,
-	PATIENT_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.PATIENT(PATIENT_NUMBER) NOT NULL,
-
-	PRIMARY KEY(ADMISSION_NUMBER,PATIENT_NUMBER),
-)
-
---Create table of bills
-CREATE TABLE BILL(
-	BILL_NUMBER BIGINT IDENTITY(1000,1) PRIMARY KEY,
-	DATE_MADE DATETIME NOT NULL,
-)
-
---Create table for bill items
-CREATE TABLE BILL_LINE_ITEM (
-	CHARGE_NUMBER INT  FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.CHARGE(CHARGE_NUMBER) NOT NULL,
-	BILL_NUMBER BIGINT FOREIGN KEY REFERENCES BILL(BILL_NUMBER) NOT NULL,
-	
-	PRIMARY KEY(CHARGE_NUMBER, BILL_NUMBER),
-)
-
--- Create table of charges assocaited with transactions 
-CREATE TABLE LakeRidgeHospital.dbo.TRANSACTION_LINE_ITEM(
-	TRANSACTION_NUMBER INT FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.CHARGE_TRANSACTION(TRANSACTION_NUMBER) NOT NULL,
-	CHARGE_NUMBER INT  FOREIGN KEY REFERENCES LakeRidgeHospital.dbo.CHARGE(CHARGE_NUMBER) NOT NULL,
-
-	PRIMARY KEY(TRANSACTION_NUMBER, CHARGE_NUMBER),
-)
-
-
-
 --USE 
 USE LakeRidgeHospital
 GO
@@ -260,7 +55,7 @@ VALUES (
 	 102
 ),
  (
---   Patient 101
+--   Patient 100001
 	'Perkins, John M',
 	'4315 James St.',
 	'Mount Pleasant',
@@ -603,19 +398,19 @@ VALUES
 -- Appointment 100000001 Yin, Manchu'
 (
 	100026,
-	convert(varchar, '2021-02-15 06:30 AM', 0),
+	convert(datetime, '2021-02-15 06:30 AM', 0),
 	'Cancer treatments'
 ),
 -- Appointment 100000002 Kanaan, Husain K'
 (
 	100029,
-	convert(varchar, '2008-03-26 11:32 AM', 0),
+	convert(datetime, '2008-03-26 11:32 AM', 0),
 	'Abdominal Pain, Gastroscopy investigation'
 ),
 -- Appointment 100000003 Santos, Luiz S
 (
 	100027,
-	convert(varchar ,'2022-03-26 11:32 AM',0),
+	convert(datetime ,'2022-03-26 11:32 AM',0),
 	'General weakness, lab tests for cause'
 ),
 -- Appointment 100000004 Servantes, Helen C'
@@ -627,55 +422,55 @@ VALUES
 -- Appointment 100000005 Bales, Natacha S
 (
 	100023,
-	convert(varchar, '2021-05-18 06:30 AM', 0),
+	convert(datetime, '2021-05-18 06:30 AM', 0),
 	'MRI Scan'
 ),
 -- Appointment 100000006 'Laker, Hans A'
 (
 	100030,
-	convert(varchar, '2022-04-10 11:32 AM', 0),
+	convert(datetime, '2022-04-10 11:32 AM', 0),
 	'Galactosemia (GALT deficiency)'
 ),
 -- Appointment 100000007 'Whitby, Debra R'
 (
 	100020,
-	convert(varchar, '2022-04-10 10:30 AM', 0),
+	convert(datetime, '2022-04-10 10:30 AM', 0),
 	'Integument Surgery'
 ),
 -- Appointment 100000008 'Weber, Bart D'
 (
 	100019,
-	convert(varchar, '2022-08-26 11:32 AM', 0),
+	convert(datetime, '2022-08-26 11:32 AM', 0),
 	'Follow up for URI after steroid course'
 ),
 -- Appointment 100000009 'Jones, James B
 (
 	100018,
-	convert(varchar, '2022-08-26 11:30 AM', 0),
+	convert(datetime, '2022-08-26 11:30 AM', 0),
 	'Consult on new treatment to control condition'
 ),
 -- Appointment 100000010 'Stiver, Alex C
 (
 	100017,
-	convert(varchar, '2022-06-06 06:30 AM', 0),
+	convert(datetime, '2022-06-06 06:30 AM', 0),
 	'Laser treatment for occular diagnosis to prevent further vision loss'
 ),
 -- Appointment 100000011 Snyder, James R
 (
 	100015,
-	convert(varchar, '2022-07-16 06:30 AM', 0),
+	convert(datetime, '2022-07-16 06:30 AM', 0),
 	'Self-injection assistance for hormone replacement therapy'
 ),
 -- Appointment 100000012 Omara, Greta J
 (
 	100016,
-	convert(varchar, '2022-06-06 10:30', 0),
+	convert(datetime, '2022-06-06 10:30', 0),
 	'Therapy sessions assistance for physical condition'
 ),
 -- Appointment 100000013 Hinkson, Aaron L
 (
 	100013,
-	convert(varchar, '2022-05-26 06:30 AM', 0),
+	convert(datetime, '2022-05-26 06:30 AM', 0),
 	'Investigation for neck growth to confirm thyroid condition'
 ),
 -- Appointment 100000014 Jordon, Eileen N
@@ -687,37 +482,37 @@ VALUES
 -- Appointment 100000015 Potts, Donna J
 (
 	100007,
-	convert(varchar, '2022-05-16 11:30 AM', 0),
+	convert(datetime, '2022-05-16 11:30 AM', 0),
 	'Medication Prescription Evaluation'
 ),
 -- Appointment 100000016 Butler Sandy J
 (
 	100005,
-	convert(varchar, '2022-03-19 11:30 AM', 0),
+	convert(datetime, '2022-03-19 11:30 AM', 0),
 	'Blood Test’ and Medication Prescription'
 ),
 --  Appointment 100000017 'Butler Sandy J
 (
 	100005,
-	convert(varchar, '2022-03-13 11:30 AM', 0),
+	convert(datetime, '2022-03-13 11:30 AM', 0),
 	'Medication Prescription Evaluation'
 ),
 --  Appointment 100000018 Butler Sandy J
 (
 	100005,
-	convert(varchar, '2022-02-12 11:30 AM', 0),
+	convert(datetime, '2022-02-12 11:30 AM', 0),
 	'Blood Test’ and Medication Prescription'
 ),
 --  Appointment 100000019 Butler Sandy J
 (
 	100005,
-	convert(varchar, '2022-01-16 11:30 AM', 0),
+	convert(datetime, '2022-01-16 11:30 AM', 0),
 	'Blood Test’ and Medication Prescription'
 ),
 --  Appointment 100000020 Perkins, John M
 (
 	100001,
-	convert(varchar, '2022-01-26 11:30 AM', 0),
+	convert(datetime, '2022-01-26 11:30 AM', 0),
 	'Blood Test’ and Medication Prescription'
 )
 
