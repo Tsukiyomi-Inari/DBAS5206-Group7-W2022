@@ -226,5 +226,24 @@ namespace LakeridgeCommunityHospital
 			saveAs.Filter = "Text Documents (*.txt)|*.txt";
 			openDialog.Filter = "Text Documents (*.txt)|*.txt";
 		}
+
+		private void physicianPatientDashboard_Toolbar_Click(object sender, EventArgs e)
+		{
+			Form1 frm = Form1.Instance;
+			frm.MdiParent = this;
+			frm.Show();
+			frm.Focus();
+			statusChange.Text = "Physician-Patient Dashboard loaded";
+		}
+
+		private void roomUtilizationDashboard_Toolbar_Click(object sender, EventArgs e)
+		{
+			RoomUtilizationDashboard frm = RoomUtilizationDashboard.Instance;
+			frm.MdiParent = this;
+			frm.Show();
+			frm.Focus();
+
+			statusChange.Text = "Room Utilization Dashboard loaded";
+		}
 	}
 }

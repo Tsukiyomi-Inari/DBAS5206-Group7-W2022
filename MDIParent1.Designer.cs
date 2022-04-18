@@ -71,6 +71,9 @@ namespace LakeridgeCommunityHospital
 			this.btnPatient = new MaterialSkin.Controls.MaterialButton();
 			this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.physicianPatientDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.roomUtilizationDashboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.menuStrip.SuspendLayout();
 			this.statusStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -88,7 +91,7 @@ namespace LakeridgeCommunityHospital
 			this.menuStrip.Location = new System.Drawing.Point(3, 64);
 			this.menuStrip.MdiWindowListItem = this.windowsMenu;
 			this.menuStrip.Name = "menuStrip";
-			this.menuStrip.Size = new System.Drawing.Size(1688, 24);
+			this.menuStrip.Size = new System.Drawing.Size(1206, 24);
 			this.menuStrip.TabIndex = 0;
 			this.menuStrip.Text = "MenuStrip";
 			// 
@@ -222,6 +225,9 @@ namespace LakeridgeCommunityHospital
 			// viewMenu
 			// 
 			this.viewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.physicianPatientDashboardToolStripMenuItem,
+            this.roomUtilizationDashboardToolStripMenuItem,
+            this.toolStripSeparator1,
             this.toolBarToolStripMenuItem,
             this.statusBarToolStripMenuItem});
 			this.viewMenu.Name = "viewMenu";
@@ -234,7 +240,7 @@ namespace LakeridgeCommunityHospital
 			this.toolBarToolStripMenuItem.CheckOnClick = true;
 			this.toolBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.toolBarToolStripMenuItem.Name = "toolBarToolStripMenuItem";
-			this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+			this.toolBarToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
 			this.toolBarToolStripMenuItem.Text = "&Toolbar";
 			// 
 			// statusBarToolStripMenuItem
@@ -243,7 +249,7 @@ namespace LakeridgeCommunityHospital
 			this.statusBarToolStripMenuItem.CheckOnClick = true;
 			this.statusBarToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.statusBarToolStripMenuItem.Name = "statusBarToolStripMenuItem";
-			this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+			this.statusBarToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
 			this.statusBarToolStripMenuItem.Text = "&Status Bar";
 			this.statusBarToolStripMenuItem.Click += new System.EventHandler(this.StatusBarToolStripMenuItem_Click);
 			// 
@@ -258,7 +264,7 @@ namespace LakeridgeCommunityHospital
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.optionsToolStripMenuItem.Text = "&Options";
 			// 
 			// windowsMenu
@@ -352,9 +358,9 @@ namespace LakeridgeCommunityHospital
             this.statusChanged,
             this.SetChangeStatus,
             this.statusChange});
-			this.statusStrip.Location = new System.Drawing.Point(3, 1131);
+			this.statusStrip.Location = new System.Drawing.Point(3, 848);
 			this.statusStrip.Name = "statusStrip";
-			this.statusStrip.Size = new System.Drawing.Size(1688, 22);
+			this.statusStrip.Size = new System.Drawing.Size(1206, 22);
 			this.statusStrip.TabIndex = 2;
 			this.statusStrip.Text = "StatusStrip";
 			// 
@@ -380,11 +386,12 @@ namespace LakeridgeCommunityHospital
 			this.btnPatient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnPatient.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.btnPatient.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
 			this.btnPatient.Depth = 0;
 			this.btnPatient.HighEmphasis = true;
 			this.btnPatient.Icon = null;
-			this.btnPatient.Location = new System.Drawing.Point(29, 1076);
+			this.btnPatient.Location = new System.Drawing.Point(82, 800);
 			this.btnPatient.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.btnPatient.MouseState = MaterialSkin.MouseState.HOVER;
 			this.btnPatient.Name = "btnPatient";
@@ -402,11 +409,12 @@ namespace LakeridgeCommunityHospital
 			this.materialButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.materialButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.materialButton2.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
 			this.materialButton2.Depth = 0;
 			this.materialButton2.HighEmphasis = true;
 			this.materialButton2.Icon = null;
-			this.materialButton2.Location = new System.Drawing.Point(357, 1076);
+			this.materialButton2.Location = new System.Drawing.Point(491, 800);
 			this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
 			this.materialButton2.Name = "materialButton2";
@@ -430,11 +438,30 @@ namespace LakeridgeCommunityHospital
 			this.pictureBox1.TabIndex = 7;
 			this.pictureBox1.TabStop = false;
 			// 
+			// physicianPatientDashboardToolStripMenuItem
+			// 
+			this.physicianPatientDashboardToolStripMenuItem.Name = "physicianPatientDashboardToolStripMenuItem";
+			this.physicianPatientDashboardToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+			this.physicianPatientDashboardToolStripMenuItem.Text = "Physician-Patient Dashboard";
+			this.physicianPatientDashboardToolStripMenuItem.Click += new System.EventHandler(this.physicianPatientDashboard_Toolbar_Click);
+			// 
+			// roomUtilizationDashboardToolStripMenuItem
+			// 
+			this.roomUtilizationDashboardToolStripMenuItem.Name = "roomUtilizationDashboardToolStripMenuItem";
+			this.roomUtilizationDashboardToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+			this.roomUtilizationDashboardToolStripMenuItem.Text = "Room Utilization Dashboard";
+			this.roomUtilizationDashboardToolStripMenuItem.Click += new System.EventHandler(this.roomUtilizationDashboard_Toolbar_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(223, 6);
+			// 
 			// mdiParentMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1694, 1156);
+			this.ClientSize = new System.Drawing.Size(1212, 873);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.statusStrip);
 			this.Controls.Add(this.menuStrip);
@@ -500,6 +527,9 @@ namespace LakeridgeCommunityHospital
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.ToolStripStatusLabel SetChangeStatus;
 		private System.Windows.Forms.ToolStripStatusLabel statusChange;
+		private System.Windows.Forms.ToolStripMenuItem physicianPatientDashboardToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem roomUtilizationDashboardToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 	}
 }
 

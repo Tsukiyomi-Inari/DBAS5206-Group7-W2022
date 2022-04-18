@@ -195,7 +195,7 @@ namespace LakeridgeCommunityHospital
 				statusChange.Text = @"Error encountered: " + err;
 				//nothing!
 			}
-			GetPatientNote(thisPatientDb.AdmiNum);
+			//GetPatientNote(thisPatientDb.AdmiNum);
 			
 		}
 	}
