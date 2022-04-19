@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Net.Mime;
 using System.Windows.Forms;
 
 namespace LakeridgeCommunityHospital
@@ -152,18 +153,34 @@ namespace LakeridgeCommunityHospital
 		}
 
 
-		public static void GetPatientDetails(string patientNumber)
+		public static string GetPatientDetails()
 		{
-			//string sqlStatement = "Select p.* , f.Provider, a.Date_admitted, a.Date_Discharged, a.Room_Number, a.Bed_Char  " +
-			//    "From  Patient p , Admission a ,Financial_Status f " +
-			//    "Where "
+			string connection = GetConnectionString();
+			string sqlStatement =
+				"Select p.* , f.Provider, a.Date_admitted, a.Date_Discharged, a.Room_Number, a.Bed_Char From  LakeRidgeHospital.dbo.Patient p , LakeRidgeHospital.dbo.Admission a ,LakeRidgeHospital.dbo.Financial_Status f Where p.Patient_Number = 100000";
+			using SqlConnection cn = new SqlConnection(connection);
+			using SqlCommand command = new SqlCommand(sqlStatement, cn);
+			cn.Open();
+			SqlDataReader DR1 = command.ExecuteReader();
+			string textbox ="";
+			if (DR1.Read())
+			{
+				for (int i = 0; i < DR1.FieldCount; i++)
+				{
+					textbox += DR1.GetValue(i).ToString() ;
+					textbox += "\t   \x0A  \x0A   \x0A   \x0A \r \r";
+				}
+			}
+			cn.Close();
+
+			return textbox;
 		}
 
 
-		public static void GetPatientNote(int admissionNumber)
+		public static DataTable GetPatientNote()
 		{
 			string connection = GetConnectionString();
-			SqlParameter admissParameter = new SqlParameter("@ADDMISSION_NUMBER", SqlDbType.Int, admissionNumber);
+			SqlParameter admissParameter = new SqlParameter("@ADDMISSION_NUMBER", 1000000);
 			string sqlStatement = "Select  a.DATE_ADMITTED, n.ENTRY  FROM LakeRidgeHospital.dbo.NOTE AS n , LakeRidgeHospital.dbo.ADMISSION AS a WHERE n.ADMISSION_Number = @ADDMISSION_NUMBER";
 			using SqlConnection cn = new SqlConnection(connection);
 			using SqlCommand command = new SqlCommand(sqlStatement, cn);
@@ -176,14 +193,14 @@ namespace LakeridgeCommunityHospital
 			for (int i = 0; i < data.Rows.Count; i++)
 			{
 				DataRow datRow = data.Rows[i];
-				ListViewItem datItem = new ListViewItem(datRow["ADMISSION_NUMBER"].ToString());
+				ListViewItem datItem = new ListViewItem();
 				datItem.SubItems.Add(datRow["DATE_ADMITTED"].ToString());
 				datItem.SubItems.Add(datRow["ENTRY"].ToString());
 			}
-
+			
 			cn.Close();
 
-
+			return data;
 		}
 
 

@@ -34,7 +34,6 @@ namespace LakeridgeCommunityHospital
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Windows.Forms.ListBox lstBoxPatientDetailsView;
 			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("2022-03-01 6:00AM , Confirmation diagnosis");
 			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("2022-02-25 7:00AM        Culture Results");
 			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("2022-01-05                         new investigation");
@@ -64,7 +63,7 @@ namespace LakeridgeCommunityHospital
 			this.dvgColAppointment = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dvgColPatient = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			lstBoxPatientDetailsView = new System.Windows.Forms.ListBox();
+			this.tboxDetails = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.dvgPatientListTable)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.tbAddNewNote.SuspendLayout();
@@ -73,17 +72,6 @@ namespace LakeridgeCommunityHospital
 			this.lblPatientDetails.SuspendLayout();
 			this.sStrpStatusBar.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// lstBoxPatientDetailsView
-			// 
-			lstBoxPatientDetailsView.BackColor = System.Drawing.Color.LightSteelBlue;
-			lstBoxPatientDetailsView.FormattingEnabled = true;
-			lstBoxPatientDetailsView.ItemHeight = 25;
-			lstBoxPatientDetailsView.Location = new System.Drawing.Point(18, 31);
-			lstBoxPatientDetailsView.Name = "lstBoxPatientDetailsView";
-			lstBoxPatientDetailsView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			lstBoxPatientDetailsView.Size = new System.Drawing.Size(729, 304);
-			lstBoxPatientDetailsView.TabIndex = 9;
 			// 
 			// dvgPatientListTable
 			// 
@@ -254,7 +242,7 @@ namespace LakeridgeCommunityHospital
 			// 
 			// lblPatientDetails
 			// 
-			this.lblPatientDetails.Controls.Add(lstBoxPatientDetailsView);
+			this.lblPatientDetails.Controls.Add(this.tboxDetails);
 			this.lblPatientDetails.Controls.Add(this.btnAddTreatment);
 			this.lblPatientDetails.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lblPatientDetails.Location = new System.Drawing.Point(3, 374);
@@ -350,6 +338,14 @@ namespace LakeridgeCommunityHospital
 			this.location.HeaderText = "LOCATION";
 			this.location.Name = "location";
 			// 
+			// tboxDetails
+			// 
+			this.tboxDetails.Location = new System.Drawing.Point(16, 44);
+			this.tboxDetails.Multiline = true;
+			this.tboxDetails.Name = "tboxDetails";
+			this.tboxDetails.Size = new System.Drawing.Size(733, 306);
+			this.tboxDetails.TabIndex = 9;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -412,6 +408,7 @@ namespace LakeridgeCommunityHospital
 		private System.Windows.Forms.DataGridViewTextBoxColumn dvgColAppointment;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dvgColPatient;
 		private System.Windows.Forms.DataGridViewTextBoxColumn location;
+		private System.Windows.Forms.TextBox tboxDetails;
 	}
 }
 

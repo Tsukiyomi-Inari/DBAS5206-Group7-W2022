@@ -161,7 +161,7 @@ namespace LakeridgeCommunityHospital
 			this.dataGridView2.Location = new System.Drawing.Point(25, 587);
 			this.dataGridView2.Name = "dataGridView2";
 			this.dataGridView2.ReadOnly = true;
-			this.dataGridView2.Size = new System.Drawing.Size(255, 150);
+			this.dataGridView2.Size = new System.Drawing.Size(255, 197);
 			this.dataGridView2.TabIndex = 5;
 			// 
 			// dataGridView3
@@ -175,10 +175,10 @@ namespace LakeridgeCommunityHospital
             this.bEDCHARDataGridViewTextBoxColumn,
             this.eXTENSIONDataGridViewTextBoxColumn});
 			this.dataGridView3.DataSource = this.bEDBindingSource;
-			this.dataGridView3.Location = new System.Drawing.Point(375, 634);
+			this.dataGridView3.Location = new System.Drawing.Point(375, 587);
 			this.dataGridView3.Name = "dataGridView3";
 			this.dataGridView3.ReadOnly = true;
-			this.dataGridView3.Size = new System.Drawing.Size(383, 150);
+			this.dataGridView3.Size = new System.Drawing.Size(383, 197);
 			this.dataGridView3.TabIndex = 6;
 			// 
 			// rOOMNUMBERDataGridViewTextBoxColumn

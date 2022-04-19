@@ -35,11 +35,13 @@ namespace LakeridgeCommunityHospital
 		private void GenerateNoteView(object sender, EventArgs e)
 		{
 			// Use class method to populate currently selected patient's list of notes
-			GetPatientNote(thisPatientDb.AdmiNum);
+			GetPatientNote() ;
+			
 		}
 
 		private void PatientListGenerate(object sender, EventArgs e)
 		{
+			tboxDetails.Text = GetPatientDetails();
 			try
 			{
 				
