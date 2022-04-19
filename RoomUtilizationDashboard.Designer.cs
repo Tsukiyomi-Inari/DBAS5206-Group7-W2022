@@ -36,30 +36,30 @@ namespace LakeridgeCommunityHospital
 			this.btnAssignRoom = new MaterialSkin.Controls.MaterialButton();
 			this.btnDischargeRoom = new MaterialSkin.Controls.MaterialButton();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.RoomNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.BedChar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.RoomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.IsOccupied = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.DateFree = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.lakeRidgeHospitalDataSet = new LakeridgeCommunityHospital.LakeRidgeHospitalDataSet();
 			this.dataGridView2 = new System.Windows.Forms.DataGridView();
-			this.rOOMTYPEIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dESCRIPTIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.rOOMTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.rOOM_TYPETableAdapter = new LakeridgeCommunityHospital.LakeRidgeHospitalDataSetTableAdapters.ROOM_TYPETableAdapter();
 			this.dataGridView3 = new System.Windows.Forms.DataGridView();
 			this.rOOMNUMBERDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.bEDCHARDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.eXTENSIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.bEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.lakeRidgeHospitalDataSet = new LakeridgeCommunityHospital.LakeRidgeHospitalDataSet();
+			this.rOOMTYPEIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dESCRIPTIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.rOOMTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.rOOM_TYPETableAdapter = new LakeridgeCommunityHospital.LakeRidgeHospitalDataSetTableAdapters.ROOM_TYPETableAdapter();
 			this.bEDTableAdapter = new LakeridgeCommunityHospital.LakeRidgeHospitalDataSetTableAdapters.BEDTableAdapter();
+			this.RoomNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.RoomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PATIENT_NUMBER = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PATIENT_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.DateFree = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gbxRoomStats.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.lakeRidgeHospitalDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.rOOMTYPEBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bEDBindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.lakeRidgeHospitalDataSet)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.rOOMTYPEBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// statusStrip1
@@ -139,55 +139,14 @@ namespace LakeridgeCommunityHospital
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RoomNumber,
-            this.BedChar,
             this.RoomType,
-            this.IsOccupied,
+            this.PATIENT_NUMBER,
+            this.PATIENT_NAME,
             this.DateFree});
 			this.dataGridView1.Location = new System.Drawing.Point(15, 99);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.Size = new System.Drawing.Size(649, 465);
 			this.dataGridView1.TabIndex = 0;
-			// 
-			// RoomNumber
-			// 
-			this.RoomNumber.DataPropertyName = "ROOM_NUMBER";
-			this.RoomNumber.HeaderText = "Room #";
-			this.RoomNumber.Name = "RoomNumber";
-			this.RoomNumber.ReadOnly = true;
-			this.RoomNumber.Width = 150;
-			// 
-			// BedChar
-			// 
-			this.BedChar.DataPropertyName = "BED_CHAR";
-			this.BedChar.HeaderText = "Bed";
-			this.BedChar.Name = "BedChar";
-			this.BedChar.ReadOnly = true;
-			this.BedChar.Width = 120;
-			// 
-			// RoomType
-			// 
-			this.RoomType.DataPropertyName = "ROOM_TYPE_NUMBER";
-			this.RoomType.HeaderText = "Room Type";
-			this.RoomType.Name = "RoomType";
-			this.RoomType.ReadOnly = true;
-			// 
-			// IsOccupied
-			// 
-			this.IsOccupied.HeaderText = "Is Occupied";
-			this.IsOccupied.Name = "IsOccupied";
-			this.IsOccupied.ReadOnly = true;
-			// 
-			// DateFree
-			// 
-			this.DateFree.HeaderText = "Discharge Date";
-			this.DateFree.Name = "DateFree";
-			this.DateFree.ReadOnly = true;
-			this.DateFree.Width = 150;
-			// 
-			// lakeRidgeHospitalDataSet
-			// 
-			this.lakeRidgeHospitalDataSet.DataSetName = "LakeRidgeHospitalDataSet";
-			this.lakeRidgeHospitalDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// dataGridView2
 			// 
@@ -204,29 +163,6 @@ namespace LakeridgeCommunityHospital
 			this.dataGridView2.ReadOnly = true;
 			this.dataGridView2.Size = new System.Drawing.Size(255, 150);
 			this.dataGridView2.TabIndex = 5;
-			// 
-			// rOOMTYPEIDDataGridViewTextBoxColumn
-			// 
-			this.rOOMTYPEIDDataGridViewTextBoxColumn.DataPropertyName = "ROOM_TYPE_ID";
-			this.rOOMTYPEIDDataGridViewTextBoxColumn.HeaderText = "ROOM_TYPE_ID";
-			this.rOOMTYPEIDDataGridViewTextBoxColumn.Name = "rOOMTYPEIDDataGridViewTextBoxColumn";
-			this.rOOMTYPEIDDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// dESCRIPTIONDataGridViewTextBoxColumn
-			// 
-			this.dESCRIPTIONDataGridViewTextBoxColumn.DataPropertyName = "DESCRIPTION";
-			this.dESCRIPTIONDataGridViewTextBoxColumn.HeaderText = "DESCRIPTION";
-			this.dESCRIPTIONDataGridViewTextBoxColumn.Name = "dESCRIPTIONDataGridViewTextBoxColumn";
-			this.dESCRIPTIONDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// rOOMTYPEBindingSource
-			// 
-			this.rOOMTYPEBindingSource.DataMember = "ROOM_TYPE";
-			this.rOOMTYPEBindingSource.DataSource = this.lakeRidgeHospitalDataSet;
-			// 
-			// rOOM_TYPETableAdapter
-			// 
-			this.rOOM_TYPETableAdapter.ClearBeforeFill = true;
 			// 
 			// dataGridView3
 			// 
@@ -271,9 +207,75 @@ namespace LakeridgeCommunityHospital
 			this.bEDBindingSource.DataMember = "BED";
 			this.bEDBindingSource.DataSource = this.lakeRidgeHospitalDataSet;
 			// 
+			// lakeRidgeHospitalDataSet
+			// 
+			this.lakeRidgeHospitalDataSet.DataSetName = "LakeRidgeHospitalDataSet";
+			this.lakeRidgeHospitalDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+			// 
+			// rOOMTYPEIDDataGridViewTextBoxColumn
+			// 
+			this.rOOMTYPEIDDataGridViewTextBoxColumn.DataPropertyName = "ROOM_TYPE_ID";
+			this.rOOMTYPEIDDataGridViewTextBoxColumn.HeaderText = "ROOM_TYPE_ID";
+			this.rOOMTYPEIDDataGridViewTextBoxColumn.Name = "rOOMTYPEIDDataGridViewTextBoxColumn";
+			this.rOOMTYPEIDDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// dESCRIPTIONDataGridViewTextBoxColumn
+			// 
+			this.dESCRIPTIONDataGridViewTextBoxColumn.DataPropertyName = "DESCRIPTION";
+			this.dESCRIPTIONDataGridViewTextBoxColumn.HeaderText = "DESCRIPTION";
+			this.dESCRIPTIONDataGridViewTextBoxColumn.Name = "dESCRIPTIONDataGridViewTextBoxColumn";
+			this.dESCRIPTIONDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// rOOMTYPEBindingSource
+			// 
+			this.rOOMTYPEBindingSource.DataMember = "ROOM_TYPE";
+			this.rOOMTYPEBindingSource.DataSource = this.lakeRidgeHospitalDataSet;
+			// 
+			// rOOM_TYPETableAdapter
+			// 
+			this.rOOM_TYPETableAdapter.ClearBeforeFill = true;
+			// 
 			// bEDTableAdapter
 			// 
 			this.bEDTableAdapter.ClearBeforeFill = true;
+			// 
+			// RoomNumber
+			// 
+			this.RoomNumber.DataPropertyName = "BED_LOCATION";
+			this.RoomNumber.HeaderText = "BED LOCATION";
+			this.RoomNumber.Name = "RoomNumber";
+			this.RoomNumber.ReadOnly = true;
+			this.RoomNumber.Width = 150;
+			// 
+			// RoomType
+			// 
+			this.RoomType.DataPropertyName = "ROOM_TYPE_NUMBER";
+			this.RoomType.HeaderText = "Room Type";
+			this.RoomType.Name = "RoomType";
+			this.RoomType.ReadOnly = true;
+			// 
+			// PATIENT_NUMBER
+			// 
+			this.PATIENT_NUMBER.DataPropertyName = "PATIENT_NUMBER";
+			this.PATIENT_NUMBER.HeaderText = "PATIENT ID";
+			this.PATIENT_NUMBER.Name = "PATIENT_NUMBER";
+			this.PATIENT_NUMBER.ReadOnly = true;
+			this.PATIENT_NUMBER.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.PATIENT_NUMBER.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// PATIENT_NAME
+			// 
+			this.PATIENT_NAME.DataPropertyName = "PATIENT_NAME";
+			this.PATIENT_NAME.HeaderText = "PATIENT NAME";
+			this.PATIENT_NAME.Name = "PATIENT_NAME";
+			// 
+			// DateFree
+			// 
+			this.DateFree.DataPropertyName = "DATE_ADMITTED";
+			this.DateFree.HeaderText = "ADMISSION DATE";
+			this.DateFree.Name = "DateFree";
+			this.DateFree.ReadOnly = true;
+			this.DateFree.Width = 150;
 			// 
 			// RoomUtilizationDashboard
 			// 
@@ -292,11 +294,11 @@ namespace LakeridgeCommunityHospital
 			this.Load += new System.EventHandler(this.RoomUtilizationDashboard_Load);
 			this.gbxRoomStats.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.lakeRidgeHospitalDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.rOOMTYPEBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bEDBindingSource)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.lakeRidgeHospitalDataSet)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.rOOMTYPEBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -308,11 +310,6 @@ namespace LakeridgeCommunityHospital
         private MaterialSkin.Controls.MaterialButton btnAssignRoom;
         private MaterialSkin.Controls.MaterialButton btnDischargeRoom;
         private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RoomNumber;
-		private System.Windows.Forms.DataGridViewTextBoxColumn BedChar;
-		private System.Windows.Forms.DataGridViewTextBoxColumn RoomType;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn IsOccupied;
-		private System.Windows.Forms.DataGridViewTextBoxColumn DateFree;
 		private MaterialSkin.Controls.MaterialMultiLineTextBox rtBoxStats;
 		private LakeRidgeHospitalDataSet lakeRidgeHospitalDataSet;
 		private System.Windows.Forms.DataGridView dataGridView2;
@@ -326,5 +323,10 @@ namespace LakeridgeCommunityHospital
 		private System.Windows.Forms.DataGridViewTextBoxColumn rOOMNUMBERDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn bEDCHARDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn eXTENSIONDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn RoomNumber;
+		private System.Windows.Forms.DataGridViewTextBoxColumn RoomType;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PATIENT_NUMBER;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PATIENT_NAME;
+		private System.Windows.Forms.DataGridViewTextBoxColumn DateFree;
 	}
 }

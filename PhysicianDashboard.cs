@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -172,8 +173,17 @@ namespace LakeridgeCommunityHospital
 
 		private void AddNoteClick(object sender, EventArgs e)
 		{
-			//PatientDB.GetPatientNumber(_toPatient);
-			PatientDB.SetPatientNote(int.Parse(thisPatientDb.AdmiNum), rtboxNewNote );
+
+			try
+			{
+				SetPatientNote(Convert.ToInt32(thisPatientDb.AdmiNum) , rtboxNewNote.ToString().Trim());
+
+			}
+			catch (FormatException ex)
+			{
+				statusChange.Text = "Error: Unable to save to database" ;
+			}
+			
 		}
 
 		private void GetCurrentPatientSelection(object sender, EventArgs e)
@@ -185,9 +195,12 @@ namespace LakeridgeCommunityHospital
 					thisPatientDb.PatientNumber = dvgPatientListTable.CurrentRow.Cells[0].ToString();
 					thisPatientDb.PatientName = dvgPatientListTable.CurrentRow.Cells[1].ToString();
 					thisPatientDb.DateDischarge = dvgPatientListTable.CurrentRow.Cells[2].ToString();
-					thisPatientDb.AdmiNum = dvgPatientListTable.CurrentRow.Cells[3].ToString(); 
+					thisPatientDb.AdmiNum = dvgPatientListTable.CurrentRow.Cells[3].Value.GetHashCode();
+					 
 					thisPatientDb.DateAdmitted = dvgPatientListTable.CurrentRow.Cells[4].ToString(); 
 					thisPatientDb.Location = dvgPatientListTable.CurrentRow.Cells[5].ToString();
+					
+					//GetPatientNote(thisPatientDb.AdmiNum);
 				}
 			}
 			catch (NullReferenceException err)
@@ -195,7 +208,7 @@ namespace LakeridgeCommunityHospital
 				statusChange.Text = @"Error encountered: " + err;
 				//nothing!
 			}
-			//GetPatientNote(thisPatientDb.AdmiNum);
+			
 			
 		}
 	}

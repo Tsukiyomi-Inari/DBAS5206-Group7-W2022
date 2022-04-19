@@ -63,9 +63,9 @@ namespace LakeridgeCommunityHospital
 			// TODO: This line of code loads data into the 'lakeRidgeHospitalDataSet.USER_TYPE' table. You can move, or remove it, as needed.
 			try
 			{
-				 string connection = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+				string connection = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
-				string sqlStatement = " SELECT r.ROOM_NUMBER , r.ROOM_TYPE_NUMBER, b.BED_CHAR FROM LakeRidgeHospital.dbo.ROOM r , LakeRidgeHospital.dbo.BED b  WHERE r.ROOM_NUMBER = b.ROOM_NUMBER";
+				string sqlStatement = "SELECT DISTINCT CONCAT(r.ROOM_NUMBER , b.BED_CHAR) AS  BED_LOCATION, r.ROOM_TYPE_NUMBER, a.PATIENT_NUMBER , p.PATIENT_NAME, a.DATE_ADMITTED FROM LakeRidgeHospital.dbo.ROOM r, LakeRidgeHospital.dbo.BED b, LakeRidgeHospital.dbo.ADMISSION a,LakeRidgeHospital.dbo.PATIENT p WHERE r.ROOM_NUMBER = a.ROOM_NUMBER AND a.PATIENT_NUMBER = p.PATIENT_NUMBER" ;
 				SqlConnection cn = new SqlConnection(connection);
 				cn.Open();
 				SqlCommand command = new SqlCommand(sqlStatement, cn);
