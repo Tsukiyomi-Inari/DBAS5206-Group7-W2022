@@ -38,6 +38,37 @@ VALUES
 	101,
 	GETDATE(),
 	12000
+),
+--	Charge 1001
+(
+	
+	100,
+	GETDATE(),
+	50.00
+),
+--	Charge 1002
+(
+	100,
+	GETDATE(),
+	100.00
+),
+--	Charge 1003
+(
+
+	102,
+	GETDATE(),
+	10.00
+),
+--	Charge 1004
+(
+	101,
+	GETDATE(),
+	120.00
+),--	Charge 1005
+(
+	102,
+	GETDATE(),
+	70.00
 )
 GO
 
@@ -542,19 +573,19 @@ INSERT INTO DB_USER (USER_TYPE_NUMBER , PASSWORD)
 VALUES 
 -- 1000
 	( 2, '5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8'  ),
---1002
+--1001
 	( 2, '62dff3687dd7d7ede1a7b0e23cfb0b096b3f577e'),
--- 1003
+-- 1002
 	( 2, 'f1d6ba9ecac467a26435a5f858c1ae3e94de2062'),
---1004
+--1003
 	( 2, 'b5747f11109a4cd1256f803de8198480e425c548'),
---1005
+--1004
 	( 2, '0e14e56072994596ecfed16a5fc3e31efe38c083'),
---1006
+--1005
 	( 2, 'd2bd354967d6da5d68c9540c90a6352e927c88c6'),
---1007
+--1006
 	( 2, 'a6fc1eec348436720c2e5fd9f5b81bf08eb98f45'),
---1008
+--1007
 	( 1,'d673d757521334075806f491b6c10293e2e61975')
 GO
 
@@ -593,11 +624,12 @@ VALUES
 		( 1004, 'M. D. Koziar', '905-732-0121', 'MT' ),
 -- Physician 105
 		( 1005, 'M. D. Mahmud', '519-657-5434', 'M' ),
---	Physician 106
+-- Physician 106
 		( 1006, 'M. D. Grant', '905-623-2783', 'RD' ),
 -- Physician 107
 		( 1007, 'M. D. Niro', '905-579-1212', 'RS' )
 GO
+
 
 --Insert Diagnosis
 INSERT INTO DIAGNOSIS (DIAGNOSIS)
@@ -848,12 +880,48 @@ VALUES
 	'B'
 ),
 --	1000001 Yin, Manchu
-(	100026, 
+(	
+	100001, 
 	GETDATE(),
 	DATEADD(day, 3, GETDATE()),  --Has not yet been discharged
 	103,
 	'B'
 -- DATEADD(day, 3, GETDATE())  <- can be used to add a discharge date set to # of days after Date_Admitted
+),
+(	100001, 
+	GETDATE(),
+	DATEADD(day, 1, GETDATE()),  --Has not yet been discharged
+	329,
+	'B'
+
+),
+(	100001, 
+	GETDATE(),
+	DATEADD(day, 3, GETDATE()),  --Has not yet been discharged
+	330,
+	'C'
+-- DATEADD(day, 3, GETDATE())  <- can be used to add a discharge date set to # of days after Date_Admitted
+),
+(	100001, 
+	GETDATE(),
+	GETDATE(),
+	330,
+	'B'
+-- DATEADD(day, 3, GETDATE())  <- can be used to add a discharge date set to # of days after Date_Admitted
+),
+(	100001, 
+	GETDATE(),
+	DATEADD(day, 9, GETDATE()),  
+	500,
+	'G'
+-- DATEADD(day, 3, GETDATE())  <- can be used to add a discharge date set to # of days after Date_Admitted
+),
+(	100001, 
+	GETDATE(),
+	GETDATE(),
+	210,
+	'A'
+
 )
 GO
 
@@ -892,7 +960,15 @@ VALUES
 --	107
 (2, 'Ward, 3 Beds', 75.00),
 --	108
-(2, 'Private' ,400.00)
+(2, 'Private' ,400.00),
+-- 	109
+(4, 'Painkillers', 10.00),
+-- 	110 
+(4, 'Oxygen', 50.00),
+-- 	111
+(5, 'Blood Test', 25.00 ),
+-- 	112
+(5, 'Ultrasound', 40.00 )
 GO
 
 --Insert Charges
@@ -901,8 +977,21 @@ VALUES
 --		'Baker, Mary A'  (SP , tV, culture)
 ( 1000000, 100, 3, GETDATE()),
 ( 1000000, 101, 1, GETDATE()),
-( 1000000, 103, 1, GETDATE())
+( 1000000, 103, 1, GETDATE()),
 --		'Yin, Manchu'
+( 1000002, 104 ,1 , GETDATE()),
+( 1000002, 105 ,1 , GETDATE()),
+( 1000002, 106 ,2 , GETDATE()),
+( 1000001, 107 ,1 , GETDATE()),
+( 1000001, 107 ,1 , GETDATE()),
+( 1000001, 110 ,1 , GETDATE()),
+( 1000003, 111 ,1 , GETDATE()),
+( 1000003, 109 ,1 , GETDATE()),
+( 1000004, 111 ,1 , GETDATE()),
+( 1000004, 105 ,1 , GETDATE()),
+( 1000005, 111 ,2 , GETDATE()),
+( 1000005, 109 ,1 , GETDATE()),
+( 1000006, 105 ,1 , GETDATE())
 GO
 
 --Insert Note 
@@ -915,106 +1004,50 @@ VALUES
 GO
 
 --Insert Admission line item
-INSERT INTO ADMISSION_LINE_ITEM (ADMISSION_NUMBER, PATIENT_NUMBER)
+INSERT INTO ADMISSION_LINE_ITEM (ADMISSION_NUMBER, PHYSICIAN_NUMBER)
 VALUES 
 -- 'Baker, Mary A'
 (
 	1000000,
-	100000
+	100
 ),
 --	'Yin, Manchu'
 (
 	1000001,
-	100026
- )
----- ‘Perkins, John M’
---,(
---	1000011,
---	101
---),
+	100
+ ),
 ---- ‘Smith, John Wu’
---(
---	1000002,
---	102
---),
+(
+	1000002,
+	102
+),
 ---- ‘Cook Ashley L’
---(
---	1000003,
---	103
---),
+(
+	1000003,
+	103
+),
 ---- ‘Blaker, Lara K’
---(
---	1000004,
---	104
---),
+(
+	1000004,
+	104
+),
 ---- ‘Butler Sandy J’
---(
---	1000005,
---	105
---),
----- 'Fabian, Elizabeth R’
---(
---	1000008,
---	108
---),
----- ‘Moore, Ethel D’
---(
---	1000009,
---	109
---),
----- ‘Baxter, Addi A’
---(
---	1000010,
---	110
---),
----- 'Jordon, Eileen N'
---(
---	1000011,
---	111
---),
----- 'Pilon, Norma J'
---(
---	1000007,
---	114
---),
----- 'Snyder, James R',
---(
---	1000008,
---	115
---),
----- 'Stiver, Alex C'
---(
---	1000012,
---	117
---),
----- 'Whitby, Debra R'
---(
---	1000013,
---	120
---),
+(
+	1000005,
+	105
+),
 ---- 'Servantes, Helen C'
---(
---	1000005,
---	121
---),
+(
+	1000005,
+	102
+),
 ---- ‘Bales, Natacha S’
---(
---	1000006,
---	123
---),
----- 'Santos, Luiz S'
---(
---	1000014,
---	127
---),
----- 'Kanaan, Husain K'
---(
---	1000015,
---	129
---)
-
-
+(
+	1000006,
+	103
+)
 GO
+
 
 --Create table of bills
 INSERT INTO BILL(DATE_MADE)
@@ -1031,19 +1064,44 @@ VALUES
 ( GETDATE() ),
 ( GETDATE() )
 ------1010
-----,( GETDATE() )
 GO
 
 --Create table for bill items
 INSERT INTO BILL_LINE_ITEM(CHARGE_NUMBER, BILL_NUMBER)
 VALUES 
 -- 'Baker, Mary A'
-( 100000, 1000 )
+( 100000, 1000 ),
+-- 'Perkins, John'
+(100001, 1001),
+(100004, 1002 ),
+(100005, 1002 ),
+(100006, 1002 ),
+(100007, 1002 ),
+(100008, 1002 ),
+(100009, 1002 ),
+(100010, 1002 ),
+(100011, 1002 ),
+(100013, 1003 ),
+(100014, 1003 ),
+(100015, 1003 )
 GO
 
 --Insert Transaction line item
 INSERT INTO TRANSACTION_LINE_ITEM (TRANSACTION_NUMBER, CHARGE_NUMBER)
 VALUES 
 -- 'Baker, Mary A'
-( 1000 , 100000 )
+( 1000 , 100000 ),
+( 1000 , 100001),
+( 1000 , 100002),
+( 1001 , 100007),
+( 1001 , 100008),
+( 1001 , 100009),
+( 1002 , 100003),
+( 1002 , 100004),
+( 1002 , 100005),
+( 1003 , 100015),
+( 1004 , 100013),
+( 1004 , 100014),
+( 1005 , 100011),
+( 1005 , 100010)
 GO
